@@ -1,2 +1,6 @@
 *.txt
 .idea
+__pycache__
+build
+dist
+translate.spec

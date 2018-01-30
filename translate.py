@@ -1,6 +1,6 @@
 import requests
-import json
 import time
+
 
 google_translate_api = 'http://translate.google.cn/translate_a/single?client=gtx&sl=en&tl=zh-CN&dt=t&q='
 
@@ -10,16 +10,11 @@ def translate(to_translate):
     to_translate = to_translate.strip()
     url = google_translate_api + to_translate
     with requests.get(url, headers={'content-type': 'application/json'}) as r:
-        content = b''
-        for line in r:
-            content = content + line
-        content = content.decode('utf-8')
-        response_json = json.loads(content)
+        response_json = r.json()
         length = len(response_json[0])
         result = ''
         for i in range(length):
             result = result + response_json[0][i][0]
-        # print(result)
         return result
 
 
